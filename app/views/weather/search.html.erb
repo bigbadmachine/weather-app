@@ -1,0 +1,49 @@
+<%= turbo_frame_tag "forecast" do %>
+  <%= render "errors" if @errors %>
+
+  <% if @forecast %>
+    <% unit_of_measure = @forecast.units %>
+    <section class="weather-card">
+      <div class="col-lg-6 col-sm-8 mx-auto">
+        <div class="title-container">
+          <p class="weather-card__title">
+            Current Weather
+          </p>
+          <p class="weather-card__subtitle">
+            <%= Time.now.strftime("%l:%M %p")  %>
+          </p>
+        </div>
+        <div class="weather-card__body">
+          <div class="weather-card__panel">
+            <div class="forecast-container">
+              <%= image_tag(@forecast.icon_url) %>
+              <div class="temp-container">
+                <div class="temp"><%= format_temp(@forecast.current_temp, @forecast.units) %></div>
+                <div class="description">
+                  <%= @forecast.description %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="weather-card__panel details-container">
+            <div class="spaced-content detail">
+              <span class="label">High</span>
+              <span class="value"><%= format_temp(@forecast.high_temp, @forecast.units) %></span>
+            </div>
+            <div class="spaced-content detail">
+              <span class="label">Low</span>
+              <span class="value"><%= format_temp(@forecast.low_temp, @forecast.units) %></span>
+            </div>
+            <div class="notes">
+              <% if @forecast.read_from_cache %>
+                <span class="note">* Loaded from cache</span>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  <% end %>
+<% end %>

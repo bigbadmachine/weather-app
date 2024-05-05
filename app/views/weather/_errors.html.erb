@@ -1,0 +1,13 @@
+<% if @errors.any? %>
+  <div id="error_explanation">
+    <div class="max-w-lg col-lg-3 mx-auto">
+      <div class="ml-3">
+        <div class="mt-2 text-sm text-red-700">
+          <% @errors.each do |message| %>
+            <p><%= message %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

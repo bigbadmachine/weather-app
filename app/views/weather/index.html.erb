@@ -1,0 +1,28 @@
+<section class="weather-search">
+  <div class="container pt-4">
+    <div class="row">
+      <div class="col-lg-8 col-sm-10 mx-auto">
+        <h1 class="display-4 fw-bold">How's the weather in...</h1>
+        <div class="search-bar mt-4 mb-3 p-3 p-lg-1 ps-lg-4">
+          <%= form_tag search_path, method: :post, data: { turbo_frame: "forecast" } do |f| %>
+            <div class="row">
+              <div class="col-lg-8 d-flex align-items-center form-group">
+                <%= text_field_tag :address, nil, class: "form-control border-0 shadow-0", placeholder: " Search by address" %>
+              </div>
+              <div class="col-lg-2 d-flex align-items-center form-group no-divider">
+                <%= select_tag :unit, options_for_select([["°F", "imperial"], ["°C", "metric"], ["K", "standard"]],"imperial"), class: "form-control form-select" %>
+              </div>
+              <div class="col-lg-2 d-grid">
+                <%= submit_tag "Search", class: "btn btn-primary rounded-pill h-100" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= turbo_frame_tag "forecast" do %>
+  <%= render file: "search" if @forecast %>
+<% end %>
